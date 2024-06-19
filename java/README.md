@@ -1,13 +1,22 @@
-Yatzy Refactoring Kata Java Version
+Refactoring Solution
 ===================================
 
-For full instructions see [top level instructions](../README.md)
+Based on the game rules defined in this kata, here is how I would model the scoring system:
 
-There are three variants of this kata each with different refactoring challenges.
+![Class Diagram](https://raw.githubusercontent.com/Julien-Fischer/Yatzy-Refactoring-Kata/java/src/main/resources/images/yatzy_model.png)
 
-## Code Reading Practice
-Here is a list of github urls of all the YatzyCalculator Java classes:
+## Architectural choices
 
-* [Yatzy1](https://github.com/emilybache/Yatzy-Refactoring-Kata/blob/main/java/src/main/java/org/codingdojo/yatzy1/Yatzy1.java)
-* [Yatzy2](https://github.com/emilybache/Yatzy-Refactoring-Kata/blob/main/java/src/main/java/org/codingdojo/yatzy2/Yatzy2.java)
-* [Yatzy3](https://github.com/emilybache/Yatzy-Refactoring-Kata/blob/main/java/src/main/java/org/codingdojo/yatzy3/Yatzy3.java)
+1. A dice roll is defined as a probability distribution, with integers 
+being the concrete outcomes in our case. There is no need for a Die class.
+
+2. Each category is designed as a strategy. Strategies are distributed by a factory 
+based on the name of a category given as input. Since they are stateless, the factory
+will reuse the same strategy instances over and over during the lifecycle of the application.
+
+3. The layers communicate through dependency injection for better testability and modularity.
+
+4. The abstractions are designed to be as agnostic of the game as possible; the specific rules
+of this version of Yatzy are implemented in the concrete classes.
+
+
