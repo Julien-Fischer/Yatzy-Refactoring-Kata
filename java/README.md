@@ -3,7 +3,7 @@ Refactoring Solution
 
 Based on the game rules defined in this kata, here is how I would model the scoring system:
 
-![Class Diagram](https://raw.githubusercontent.com/Julien-Fischer/Yatzy-Refactoring-Kata/java/src/main/resources/images/yatzy_model.png)
+![Class Diagram](https://raw.githubusercontent.com/Julien-Fischer/Yatzy-Refactoring-Kata/main/java/src/main/resources/images/yatzy_model.png)
 
 ## Architectural choices
 
