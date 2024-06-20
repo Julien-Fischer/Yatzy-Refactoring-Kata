@@ -1,6 +1,7 @@
 package org.codingdojo.yatzy1.scoring.dice;
 
 import java.util.Deque;
+import java.util.Optional;
 
 /**
  * A roll is the result of throwing one or more dice simultaneously.
@@ -56,5 +57,13 @@ public interface Roll {
      * @return a list of {@link Pair}, sorted by descending order
      */
      Deque<Pair> getPairs();
+
+    /**
+     * @return the highest pair in this roll if any is found.
+     */
+     default Optional<Pair> getHighestPair() {
+         var first = getPairs().pollFirst();
+         return (first == null) ? Optional.empty() : Optional.of(first);
+     }
 
 }

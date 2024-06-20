@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Deque;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +39,15 @@ public class ImmutableRollTests {
             arguments(2, RollDataset.LARGE_STRAIGHT.getRoll()),
             arguments(1, RollDataset.PAIR_3_3.getRoll()),
             arguments(1, RollDataset.PAIR_6_6_6_6.getRoll())
+        );
+    }
+
+    private static Stream<Arguments> highestPairDatasource() {
+        return Stream.of(
+            arguments(3, RollDataset.PAIR_2_2_3_3.getRoll()),
+            arguments(6, RollDataset.PAIR_5_5_5_6_6.getRoll()),
+            arguments(4, RollDataset.PAIR_1_1_1_4_4.getRoll()),
+            arguments(4, RollDataset.PAIR_3_3_4_4_4.getRoll())
         );
     }
 
@@ -154,6 +164,38 @@ public class ImmutableRollTests {
         var pairA = pairs.pollFirst();
         var pairB = pairs.pollLast();
         assertEquals(1, pairA.compareTo(pairB));
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT", "SMALL_STRAIGHT_SHUFFLED", "LARGE_STRAIGHT_SHUFFLED"})
+    void getHighestPair_whenNoPairFound_shouldReturnEmptyOptional(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        Optional<Pair> optionalPair = roll.getHighestPair();
+        // Then
+        assertTrue(optionalPair.isEmpty());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"PAIR_5_5_5_6_6", "PAIR_1_1_1_4_4", "PAIR_3_3_4_4_4"})
+    void getHighestPair_whenOnePairFound_shouldReturnIt(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        var optionalPair = roll.getHighestPair();
+        // Then
+        assertTrue(optionalPair.isPresent());
+    }
+
+    @ParameterizedTest
+    @MethodSource("highestPairDatasource")
+    void getHighestPair_whenMultiplePairs_shouldReturnHighestOne(int expected, Roll roll) {
+        // When
+        var optionalPair = roll.getHighestPair();
+        // Then
+        var pair = optionalPair.orElseThrow();
+        assertEquals(expected, pair.value());
     }
 
 }
