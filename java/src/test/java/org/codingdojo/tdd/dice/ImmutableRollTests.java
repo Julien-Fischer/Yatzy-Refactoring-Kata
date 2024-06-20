@@ -62,7 +62,11 @@ public class ImmutableRollTests {
     }
 
     @ParameterizedTest
-    @EnumSource(value = RollDataset.class, names = {"YATZY_1", "YATZY_2", "YATZY_4", "YATZY_6"}, mode = EnumSource.Mode.EXCLUDE)
+    @EnumSource(
+        value = RollDataset.class,
+        names = {"YATZY_1", "YATZY_2", "YATZY_4", "YATZY_6"},
+        mode = EnumSource.Mode.EXCLUDE
+    )
     void isDeterministic_whenSomeDiceHaveDifferentValues_shouldReturnFalse(RollDataset data) {
         // Given
         var roll = data.getRoll();
@@ -80,7 +84,11 @@ public class ImmutableRollTests {
     }
 
     @ParameterizedTest
-    @EnumSource(value = RollDataset.class, names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT"}, mode = EnumSource.Mode.EXCLUDE)
+    @EnumSource(
+        value = RollDataset.class,
+        names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT", "SMALL_STRAIGHT_SHUFFLED", "LARGE_STRAIGHT_SHUFFLED"},
+        mode = EnumSource.Mode.EXCLUDE
+    )
     void isSequential_whenNotSequential_shouldReturnFalse(RollDataset data) {
         // Given
         var roll = data.getRoll();
