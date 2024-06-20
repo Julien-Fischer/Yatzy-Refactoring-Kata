@@ -4,6 +4,7 @@ import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
 import org.codingdojo.yatzy1.scoring.strategies.impl.LargeStraightStrategy;
 import org.codingdojo.yatzy1.scoring.strategies.impl.PairStrategy;
 import org.codingdojo.yatzy1.scoring.strategies.impl.SmallStraightStrategy;
+import org.codingdojo.yatzy1.scoring.strategies.impl.TwoPairStrategy;
 
 public class Yatzy1 {
 
@@ -93,25 +94,9 @@ public class Yatzy1 {
         return new PairStrategy().getScore(roll);
     }
 
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5)
-    {
-        int[] counts = new int[6];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
-        int n = 0;
-        int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (counts[6-i-1] >= 2) {
-                n++;
-                score += (6-i);
-            }
-        if (n == 2)
-            return score * 2;
-        else
-            return 0;
+    public static int two_pair(int d1, int d2, int d3, int d4, int d5) {
+        var roll = new ImmutableRoll(d1, d2, d3, d4, d5);
+        return new TwoPairStrategy().getScore(roll);
     }
 
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
