@@ -1,7 +1,5 @@
 package org.codingdojo.yatzy1.scoring.strategies.impl;
 
-import org.codingdojo.yatzy1.scoring.dice.Pair;
-import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
 
 /**
@@ -14,18 +12,10 @@ import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
  *
  * @see <a href="https://sammancoaching.org/kata_descriptions/yatzy.html">Three of a kind Kata Rules</a>
  */
-public class ThreeOfAKindStrategy implements ScoringStrategy {
+public class ThreeOfAKindStrategy extends OfAKindStrategy {
 
-    private static final int THRESHOLD = 3;
-
-    @Override
-    public int getScore(Roll roll) {
-        var pairs = roll.getPairs();
-        return pairs.stream()
-            .filter(p -> p.frequency() >= THRESHOLD)
-            .limit(THRESHOLD)
-            .mapToInt(Pair::value)
-            .sum() * THRESHOLD;
+    public ThreeOfAKindStrategy() {
+        super(3);
     }
 
 }
