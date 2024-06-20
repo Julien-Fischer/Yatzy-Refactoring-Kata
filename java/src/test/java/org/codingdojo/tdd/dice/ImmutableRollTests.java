@@ -161,8 +161,8 @@ public class ImmutableRollTests {
         // When
         Deque<Pair> pairs = roll.getPairs();
         // Then
-        var pairA = pairs.pollFirst();
-        var pairB = pairs.pollLast();
+        var pairA = pairs.peekFirst();
+        var pairB = pairs.peekLast();
         assertEquals(1, pairA.compareTo(pairB));
     }
 

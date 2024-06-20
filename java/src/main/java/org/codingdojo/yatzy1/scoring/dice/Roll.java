@@ -62,7 +62,7 @@ public interface Roll {
      * @return the highest pair in this roll if any is found.
      */
      default Optional<Pair> getHighestPair() {
-         var first = getPairs().pollFirst();
+         var first = getPairs().peekFirst();
          return (first == null) ? Optional.empty() : Optional.of(first);
      }
 

@@ -18,8 +18,8 @@ public class FullHouseStrategy implements ScoringStrategy {
     public int getScore(Roll roll) {
         var pairs = roll.getPairs();
         if (pairs.size() == 2) {
-            var highest = pairs.pollFirst();
-            var lowest = pairs.pollLast();
+            var highest = pairs.peekFirst();
+            var lowest = pairs.peekLast();
             if (highest.frequency() + lowest.frequency() == 5) {
                 return roll.getSum();
             }
