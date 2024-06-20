@@ -16,8 +16,8 @@ public interface StrategyFactory {
      *
      * @param name  the name of the desired category
      * @return an instance of the category identified by the specified name
-     * @throws IllegalArgumentException if {@code null} is given as input
+     * @throws NullPointerException if {@code null} is given as input
      */
-    ScoringStrategy of (CategoryName name) throws IllegalArgumentException;
+    ScoringStrategy of (CategoryName name) throws NullPointerException;
 
 }

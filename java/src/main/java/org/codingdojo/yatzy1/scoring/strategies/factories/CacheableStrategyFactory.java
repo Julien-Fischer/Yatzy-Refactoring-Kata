@@ -30,7 +30,7 @@ public class CacheableStrategyFactory implements StrategyFactory {
     private CacheableStrategyFactory() {}
 
     @Override
-    public ScoringStrategy of(CategoryName name) throws IllegalArgumentException {
+    public ScoringStrategy of(CategoryName name) throws NullPointerException {
         Objects.requireNonNull(name, this::getMessage);
         if (!cache.containsKey(name)) {
             cache.put(name, createCategory(name));
