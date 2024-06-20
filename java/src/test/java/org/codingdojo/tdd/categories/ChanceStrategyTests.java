@@ -1,7 +1,9 @@
-package org.codingdojo.tdd.dice;
+package org.codingdojo.tdd.categories;
 
 import org.codingdojo.dataset.RollDataset;
 import org.codingdojo.yatzy1.scoring.dice.Roll;
+import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
+import org.codingdojo.yatzy1.scoring.strategies.impl.ChanceStrategy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,7 +13,9 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class ImmutableRollTests {
+public class ChanceStrategyTests {
+
+    private final ScoringStrategy strategy = new ChanceStrategy();
 
     ///////////////////////////////////////////////////////////
     // DATASOURCE
@@ -35,7 +39,7 @@ public class ImmutableRollTests {
     @MethodSource("rollSumDatasource")
     void sum_shouldReturnTheSumOfTheDiceInThisRoll(int expected, Roll roll) {
         // When
-        int sum = roll.getSum();
+        int sum = strategy.getSum(roll);
         // Then
         assertEquals(expected, sum);
     }

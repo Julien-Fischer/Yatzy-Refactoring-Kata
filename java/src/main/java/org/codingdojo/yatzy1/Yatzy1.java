@@ -1,12 +1,6 @@
 package org.codingdojo.yatzy1;
 
-import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
-
 public class Yatzy1 {
-
-    public static int chance(int d1, int d2, int d3, int d4, int d5) {
-        return new ImmutableRoll(d1, d2, d3, d4, d5).getSum();
-    }
 
     public static int yatzy(int... dice)
     {

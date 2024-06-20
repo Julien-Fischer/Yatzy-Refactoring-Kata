@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Yatzy1Test {
 
-    @Test
-    public void chance_scores_sum_of_all_dice() {
-        int expected = 15;
-        int actual = Yatzy1.chance(2,3,4,5,1);
-        assertEquals(expected, actual);
-        assertEquals(16, Yatzy1.chance(3,3,4,5,1));
-    }
-
     @Test public void yatzy_scores_50() {
         int expected = 50;
         int actual = Yatzy1.yatzy(4,4,4,4,4);
@@ -45,7 +37,7 @@ public class Yatzy1Test {
     }
 
     @Test
-    public void fours_test() 
+    public void fours_test()
     {
         assertEquals(12, new Yatzy1(4,4,4,5,5).fours());
         assertEquals(8, new Yatzy1(4,4,5,5,5).fours());
@@ -80,7 +72,7 @@ public class Yatzy1Test {
     }
 
     @Test
-    public void three_of_a_kind() 
+    public void three_of_a_kind()
     {
         assertEquals(9, Yatzy1.three_of_a_kind(3,3,3,4,5));
         assertEquals(15, Yatzy1.three_of_a_kind(5,3,5,4,5));
