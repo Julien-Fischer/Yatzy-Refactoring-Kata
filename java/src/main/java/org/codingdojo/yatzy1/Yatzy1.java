@@ -2,10 +2,7 @@ package org.codingdojo.yatzy1;
 
 import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
 import org.codingdojo.yatzy1.scoring.strategies.impl.*;
-import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.FoursStrategy;
-import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.OnesStrategy;
-import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.ThreesStrategy;
-import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.TwosStrategy;
+import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.*;
 
 public class Yatzy1 {
 
@@ -47,14 +44,9 @@ public class Yatzy1 {
         return new FoursStrategy().getScore(roll);
     }
 
-    public int fives()
-    {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++)
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+    public int fives() {
+        var roll = new ImmutableRoll(dice[0], dice[1], dice[2], dice[3], dice[4]);
+        return new FivesStrategy().getScore(roll);
     }
 
     public int sixes()
