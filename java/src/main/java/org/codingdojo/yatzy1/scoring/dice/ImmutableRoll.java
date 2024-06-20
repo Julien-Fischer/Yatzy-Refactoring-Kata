@@ -71,4 +71,8 @@ public class ImmutableRoll implements Roll {
             .toList();
     }
 
+    @Override
+    public String toString() {
+        return "ImmutableRoll{" + Arrays.toString(dices) + '}';
+    }
 }

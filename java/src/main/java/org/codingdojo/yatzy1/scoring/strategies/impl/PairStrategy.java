@@ -11,7 +11,7 @@ import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
  * - {3,3,3,4,1} -> 6
  * - {3,3,3,3,1} -> 6
  *
- * @see <a href="https://sammancoaching.org/kata_descriptions/yatzy.html">Chance Kata Rules</a>
+ * @see <a href="https://sammancoaching.org/kata_descriptions/yatzy.html">Pair Kata Rules</a>
  */
 public class PairStrategy implements ScoringStrategy {
 
