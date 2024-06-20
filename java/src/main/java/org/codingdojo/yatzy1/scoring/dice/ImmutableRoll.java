@@ -33,7 +33,7 @@ public class ImmutableRoll implements Roll {
 
     @Override
     public boolean isSequential() {
-        var sorted = getSortedList();
+        var sorted = getDice();
         for (var i = sorted.size() - 2; i >= 0; i--) {
             if (sorted.get(i) != sorted.get(i + 1) + 1) {
                 return false;
@@ -44,20 +44,21 @@ public class ImmutableRoll implements Roll {
 
     @Override
     public int getLowestDie() {
-        return getSortedList().get(dices.length - 1);
+        return getDice().get(dices.length - 1);
     }
 
     @Override
     public Deque<Pair> getPairs() {
         Map<Integer, Integer> counts = new TreeMap<>(Comparator.reverseOrder());
-        getSortedList().forEach(die -> counts.merge(die, 1, Integer::sum));
+        getDice().forEach(die -> counts.merge(die, 1, Integer::sum));
         return counts.entrySet().stream()
             .filter(e -> e.getValue() > 1)
             .map(entry -> new Pair(entry.getKey(), entry.getValue()))
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    private List<Integer> getSortedList() {
+    @Override
+    public List<Integer> getDice() {
         if (sortedList == null) {
             sortedList = createSortedList();
         }

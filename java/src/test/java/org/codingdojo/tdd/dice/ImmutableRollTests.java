@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Deque;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -48,6 +49,18 @@ public class ImmutableRollTests {
             arguments(6, RollDataset.PAIR_5_5_5_6_6.getRoll()),
             arguments(4, RollDataset.PAIR_1_1_1_4_4.getRoll()),
             arguments(4, RollDataset.PAIR_3_3_4_4_4.getRoll())
+        );
+    }
+
+    private static Stream<Arguments> diceListSource() {
+        return Stream.of(
+            arguments(List.of(6, 6, 6, 6, 6), RollDataset.YATZY_6.getRoll()),
+            arguments(List.of(5, 4, 3, 2, 1), RollDataset.SMALL_STRAIGHT.getRoll()),
+            arguments(List.of(6, 5, 4, 3, 2), RollDataset.LARGE_STRAIGHT.getRoll()),
+            arguments(List.of(5, 4, 3, 2, 1), RollDataset.SMALL_STRAIGHT_SHUFFLED.getRoll()),
+            arguments(List.of(6, 5, 4, 3, 2), RollDataset.LARGE_STRAIGHT_SHUFFLED.getRoll()),
+            arguments(List.of(5, 4, 3, 1, 1), RollDataset.PAIR_1_1.getRoll()),
+            arguments(List.of(5, 4, 3, 3, 1), RollDataset.PAIR_3_3.getRoll())
         );
     }
 
@@ -198,4 +211,12 @@ public class ImmutableRollTests {
         assertEquals(expected, pair.value());
     }
 
+    @ParameterizedTest
+    @MethodSource("diceListSource")
+    void getDice_shouldReturnDiceValuesAsList(List<Integer> expected, Roll roll) {
+        // When
+        var actual = roll.getDice();
+        // Then
+        assertIterableEquals(expected, actual);
+    }
 }

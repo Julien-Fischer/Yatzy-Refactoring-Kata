@@ -1,6 +1,7 @@
 package org.codingdojo.yatzy1.scoring.dice;
 
 import java.util.Deque;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -65,5 +66,10 @@ public interface Roll {
          var first = getPairs().peekFirst();
          return (first == null) ? Optional.empty() : Optional.of(first);
      }
+
+    /**
+     * @return the dice in this roll as a list of integers.
+     */
+    List<Integer> getDice();
 
 }
