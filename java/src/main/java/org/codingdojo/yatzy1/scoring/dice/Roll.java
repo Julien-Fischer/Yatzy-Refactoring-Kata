@@ -1,6 +1,8 @@
 package org.codingdojo.yatzy1.scoring.dice;
 
- /**
+import java.util.Deque;
+
+/**
  * A roll is the result of throwing one or more dice simultaneously.
  * In Yatzy specifically, a roll is defined as a set of five six-faced dice.
  */
@@ -43,5 +45,16 @@ public interface Roll {
       * @return the die with the lowest value in this {@link Roll}.
       */
      int getLowestDie();
+
+    /**
+     * Returns all the pairs in this roll, sorted by descending order.
+     * If this roll contains no matching dice, the returned list is empty.
+     * In the context of Yatzy, a die roll can contain 0..2 pairs.
+     * The concrete choice of data structure and sorting algorithm is left
+     * to the implementer.
+     *
+     * @return a list of {@link Pair}, sorted by descending order
+     */
+     Deque<Pair> getPairs();
 
 }

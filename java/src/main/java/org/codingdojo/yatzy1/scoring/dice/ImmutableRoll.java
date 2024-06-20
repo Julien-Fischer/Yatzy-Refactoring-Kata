@@ -1,8 +1,7 @@
 package org.codingdojo.yatzy1.scoring.dice;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -46,6 +45,16 @@ public class ImmutableRoll implements Roll {
     @Override
     public int getLowestDie() {
         return getSortedList().get(dices.length - 1);
+    }
+
+    @Override
+    public Deque<Pair> getPairs() {
+        Map<Integer, Integer> counts = new TreeMap<>(Comparator.reverseOrder());
+        getSortedList().forEach(die -> counts.merge(die, 1, Integer::sum));
+        return counts.entrySet().stream()
+            .filter(e -> e.getValue() > 1)
+            .map(entry -> new Pair(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     private List<Integer> getSortedList() {

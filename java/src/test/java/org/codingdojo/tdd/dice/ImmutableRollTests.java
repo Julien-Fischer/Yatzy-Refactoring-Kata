@@ -1,12 +1,14 @@
 package org.codingdojo.tdd.dice;
 
 import org.codingdojo.dataset.RollDataset;
+import org.codingdojo.yatzy1.scoring.dice.Pair;
 import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Deque;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +37,7 @@ public class ImmutableRollTests {
             arguments(1, RollDataset.SMALL_STRAIGHT.getRoll()),
             arguments(2, RollDataset.LARGE_STRAIGHT.getRoll()),
             arguments(1, RollDataset.PAIR_3_3.getRoll()),
-            arguments(4, RollDataset.PAIR_6_6_6_6.getRoll())
+            arguments(1, RollDataset.PAIR_6_6_6_6.getRoll())
         );
     }
 
@@ -103,6 +105,55 @@ public class ImmutableRollTests {
         var actual = roll.getLowestDie();
         // Then
         assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @EnumSource(
+        value = RollDataset.class,
+        names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT", "SMALL_STRAIGHT_SHUFFLED", "LARGE_STRAIGHT_SHUFFLED"}
+    )
+    void getPairs_whenNoMatchingDice_shouldReturnEmptyList(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        Deque<Pair> pairs = roll.getPairs();
+        // Then
+        assertEquals(0, pairs.size());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"PAIR_1_1", "PAIR_5_5", "PAIR_3_3", "PAIR_3_3_3"})
+    void getPairs_whenOnePair_shouldReturnListOfLengthOne(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        Deque<Pair> pairs = roll.getPairs();
+        // Then
+        assertEquals(1, pairs.size());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"PAIR_5_5_5_6_6", "PAIR_1_1_1_4_4", "PAIR_3_3_4_4_4"})
+    void getPairs_whenTwoPairs_shouldReturnListOfLengthTwo(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        Deque<Pair> pairs = roll.getPairs();
+        // Then
+        assertEquals(2, pairs.size());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"PAIR_5_5_5_6_6", "PAIR_1_1_1_4_4", "PAIR_3_3_4_4_4"})
+    void getPairs_whenTwoPairs_shouldReturnHighestPairFirst(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When
+        Deque<Pair> pairs = roll.getPairs();
+        // Then
+        var pairA = pairs.pollFirst();
+        var pairB = pairs.pollLast();
+        assertEquals(1, pairA.compareTo(pairB));
     }
 
 }
