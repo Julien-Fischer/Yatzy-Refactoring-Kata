@@ -1,16 +1,11 @@
 package org.codingdojo.yatzy1;
 
+import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
+
 public class Yatzy1 {
 
-    public static int yatzy(int... dice)
-    {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+    public static int yatzy(int d1, int d2, int d3, int d4, int d5) {
+        return new ImmutableRoll(d1, d2, d3, d4, d5).isDeterministic() ? 50 : 0;
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {

@@ -5,6 +5,7 @@ import org.codingdojo.yatzy1.scoring.dice.Roll;
 
 public enum RollDataset {
     YATZY_1             (new ImmutableRoll(1, 1, 1, 1, 1)),
+    YATZY_2             (new ImmutableRoll(2, 2, 2, 2, 2)),
     YATZY_4             (new ImmutableRoll(4, 4, 4, 4, 4)),
     SMALL_STRAIGHT      (new ImmutableRoll(1, 2, 3, 4, 5)),
     LARGE_STRAIGHT      (new ImmutableRoll(2, 3, 4, 5, 6)),

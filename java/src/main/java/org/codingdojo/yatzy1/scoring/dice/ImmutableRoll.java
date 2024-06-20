@@ -23,4 +23,8 @@ public class ImmutableRoll implements Roll {
         return IntStream.of(dices).sum();
     }
 
+    @Override
+    public boolean isDeterministic() {
+        return IntStream.of(dices).distinct().count() == 1;
+    }
 }

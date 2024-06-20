@@ -4,11 +4,12 @@ import org.codingdojo.dataset.RollDataset;
 import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class ImmutableRollTests {
@@ -38,6 +39,24 @@ public class ImmutableRollTests {
         int sum = roll.getSum();
         // Then
         assertEquals(expected, sum);
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"YATZY_1", "YATZY_2", "YATZY_4"})
+    void isDeterministic_whenAllDiceHaveTheSameValue_shouldReturnTrue(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When + Then
+        assertTrue(roll.isDeterministic());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"YATZY_1", "YATZY_2", "YATZY_4"}, mode = EnumSource.Mode.EXCLUDE)
+    void isDeterministic_whenSomeDiceHaveDifferentValues_shouldReturnFalse(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When + Then
+        assertFalse(roll.isDeterministic());
     }
 
 }
