@@ -58,7 +58,7 @@ public class CacheableStrategyFactoryTests {
 
     @Test
     void of_whenNullParameter_shouldThrowException() {
-        assertThrows(IllegalArgumentException.class, () -> factory.of(null));
+        assertThrows(NullPointerException.class, () -> factory.of(null));
     }
 
     @ParameterizedTest
