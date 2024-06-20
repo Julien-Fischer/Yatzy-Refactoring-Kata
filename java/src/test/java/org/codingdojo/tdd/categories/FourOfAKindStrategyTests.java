@@ -3,7 +3,7 @@ package org.codingdojo.tdd.categories;
 import org.codingdojo.dataset.RollDataset;
 import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
-import org.codingdojo.yatzy1.scoring.strategies.impl.ThreeOfAKindStrategy;
+import org.codingdojo.yatzy1.scoring.strategies.impl.FourOfAKindStrategy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class ThreeOfAKindStrategyTests {
+public class FourOfAKindStrategyTests {
 
-    private final ScoringStrategy strategy = new ThreeOfAKindStrategy();
+    private final ScoringStrategy strategy = new FourOfAKindStrategy();
 
     ///////////////////////////////////////////////////////////
     // DATASETS
@@ -24,15 +24,13 @@ public class ThreeOfAKindStrategyTests {
 
     private static Stream<Arguments> scoreSource() {
         return Stream.of(
-            arguments( 3, RollDataset.YATZY_1.getRoll()),
-            arguments( 6, RollDataset.YATZY_2.getRoll()),
-            arguments(12, RollDataset.YATZY_4.getRoll()),
-            arguments(18, RollDataset.YATZY_6.getRoll()),
-            arguments(15, RollDataset.PAIR_5_5_5_6_6.getRoll()),
-            arguments( 3, RollDataset.PAIR_1_1_1_4_4.getRoll()),
-            arguments(12, RollDataset.PAIR_3_3_4_4_4.getRoll()),
-            arguments( 9, RollDataset.PAIR_3_3_3.getRoll()),
-            arguments(18, RollDataset.PAIR_6_6_6_6.getRoll())
+            arguments( 4, RollDataset.YATZY_1.getRoll()),
+            arguments( 8, RollDataset.YATZY_2.getRoll()),
+            arguments(16, RollDataset.YATZY_4.getRoll()),
+            arguments(24, RollDataset.YATZY_6.getRoll()),
+            arguments(24, RollDataset.PAIR_6_6_6_6.getRoll()),
+            arguments( 4, RollDataset.PAIR_1_1_1_1.getRoll()),
+            arguments(16, RollDataset.PAIR_4_4_4_4.getRoll())
         );
     }
 
@@ -48,17 +46,13 @@ public class ThreeOfAKindStrategyTests {
             "YATZY_2",
             "YATZY_4",
             "YATZY_6",
-            "PAIR_5_5_5_6_6",
-            "PAIR_1_1_1_4_4",
+            "PAIR_6_6_6_6",
             "PAIR_1_1_1_1",
-            "PAIR_4_4_4_4",
-            "PAIR_3_3_4_4_4",
-            "PAIR_3_3_3",
-            "PAIR_6_6_6_6"
+            "PAIR_4_4_4_4"
         },
         mode = EnumSource.Mode.EXCLUDE
     )
-    void getScore_whenLessThanThreeOfAKind_shouldReturnZero(RollDataset data) {
+    void getScore_whenLessThanFourOfAKind_shouldReturnZero(RollDataset data) {
         // Given
         var roll = data.getRoll();
         // When
@@ -69,7 +63,7 @@ public class ThreeOfAKindStrategyTests {
 
     @ParameterizedTest
     @MethodSource("scoreSource")
-    void getScore_whenAtLeastThreeOffAKind_shouldReturnSumOfMatchingDice(int expected, Roll roll) {
+    void getScore_whenAtLeastFourOffAKind_shouldReturnSumOfMatchingDice(int expected, Roll roll) {
         // When
         var actual = strategy.getScore(roll);
         // Then

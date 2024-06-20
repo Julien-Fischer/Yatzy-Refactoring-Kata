@@ -12,7 +12,7 @@ import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
  *
  * @see <a href="https://sammancoaching.org/kata_descriptions/yatzy.html">Three of a kind Kata Rules</a>
  */
-public class ThreeOfAKindStrategy extends OfAKindStrategy {
+public class ThreeOfAKindStrategy extends AbstractOfAKindStrategy {
 
     public ThreeOfAKindStrategy() {
         super(3);

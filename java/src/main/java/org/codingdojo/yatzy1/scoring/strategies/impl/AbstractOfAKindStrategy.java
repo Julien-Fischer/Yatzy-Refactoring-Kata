@@ -9,11 +9,11 @@ import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
  * same number; zero otherwise.
  * The exact value to use as a threshold must be provided by subtypes.
  */
-public abstract class OfAKindStrategy implements ScoringStrategy {
+public abstract class AbstractOfAKindStrategy implements ScoringStrategy {
 
     private final int threshold;
 
-    public OfAKindStrategy(int threshold) {
+    public AbstractOfAKindStrategy(int threshold) {
         this.threshold = threshold;
     }
 
