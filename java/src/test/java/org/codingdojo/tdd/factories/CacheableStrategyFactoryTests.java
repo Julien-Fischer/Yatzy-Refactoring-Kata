@@ -63,7 +63,7 @@ public class CacheableStrategyFactoryTests {
 
     @ParameterizedTest
     @EnumSource(CategoryName.class)
-    void of_shouldReturnTheCategoryIdentifiedByItsName(CategoryName categoryName) {
+    void of_whenCalledMultipleTimes_shouldAlwaysReturnTheSameCategoryInstance(CategoryName categoryName) {
         // Given
         var first = factory.of(categoryName);
         // When
@@ -74,7 +74,7 @@ public class CacheableStrategyFactoryTests {
 
     @ParameterizedTest
     @MethodSource("strategyTypesDatasource")
-    void of_whenCalledMultipleTimes_shouldAlwaysReturnTheSameCategoryInstance(Class<?> expected, CategoryName categoryName) {
+    void of_shouldReturnTheCategoryIdentifiedByItsName(Class<?> expected, CategoryName categoryName) {
         // When
         var actual = factory.of(categoryName);
         // Then
