@@ -16,6 +16,7 @@ import java.util.stream.IntStream;
 public class ImmutableRoll implements Roll {
 
     private final int[] dices;
+    private List<Integer> sortedList;
 
     public ImmutableRoll(int die1, int die2, int die3, int die4, int die5) {
         dices = new int[] {die1, die2, die3, die4, die5};
@@ -42,7 +43,19 @@ public class ImmutableRoll implements Roll {
         return true;
     }
 
+    @Override
+    public int getLowestDie() {
+        return getSortedList().get(dices.length - 1);
+    }
+
     private List<Integer> getSortedList() {
+        if (sortedList == null) {
+            sortedList = createSortedList();
+        }
+        return sortedList;
+    }
+
+    private List<Integer> createSortedList() {
         return Arrays.stream(dices)
             .boxed()
             .sorted(Comparator.reverseOrder())

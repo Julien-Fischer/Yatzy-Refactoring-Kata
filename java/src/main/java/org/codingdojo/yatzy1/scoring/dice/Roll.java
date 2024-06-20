@@ -39,4 +39,9 @@ public interface Roll {
       */
      boolean isSequential();
 
+     /**
+      * @return the die with the lowest value in this {@link Roll}.
+      */
+     int getLowestDie();
+
 }

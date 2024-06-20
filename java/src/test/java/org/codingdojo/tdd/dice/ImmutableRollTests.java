@@ -28,6 +28,17 @@ public class ImmutableRollTests {
         );
     }
 
+    private static Stream<Arguments> rollLowestDieDatasource() {
+        return Stream.of(
+            arguments(1, RollDataset.YATZY_1.getRoll()),
+            arguments(4, RollDataset.YATZY_4.getRoll()),
+            arguments(1, RollDataset.SMALL_STRAIGHT.getRoll()),
+            arguments(2, RollDataset.LARGE_STRAIGHT.getRoll()),
+            arguments(1, RollDataset.PAIR_3_3.getRoll()),
+            arguments(4, RollDataset.PAIR_6_6_6_6.getRoll())
+        );
+    }
+
     ///////////////////////////////////////////////////////////
     // UNIT TESTS
     ///////////////////////////////////////////////////////////
@@ -75,6 +86,15 @@ public class ImmutableRollTests {
         var roll = data.getRoll();
         // When + Then
         assertFalse(roll.isSequential());
+    }
+
+    @ParameterizedTest
+    @MethodSource("rollLowestDieDatasource")
+    void getLowestDie_shouldReturnLowestDie(int expected, Roll roll) {
+        // When
+        var actual = roll.getLowestDie();
+        // Then
+        assertEquals(expected, actual);
     }
 
 }
