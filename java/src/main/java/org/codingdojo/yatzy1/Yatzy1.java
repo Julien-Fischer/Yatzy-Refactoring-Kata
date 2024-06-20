@@ -1,16 +1,11 @@
 package org.codingdojo.yatzy1;
 
+import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
+
 public class Yatzy1 {
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5)
-    {
-        int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
-        return total;
+    public static int chance(int d1, int d2, int d3, int d4, int d5) {
+        return new ImmutableRoll(d1, d2, d3, d4, d5).getSum();
     }
 
     public static int yatzy(int... dice)
@@ -30,7 +25,7 @@ public class Yatzy1 {
         if (d2 == 1) sum++;
         if (d3 == 1) sum++;
         if (d4 == 1) sum++;
-        if (d5 == 1) 
+        if (d5 == 1)
             sum++;
 
         return sum;
@@ -47,7 +42,7 @@ public class Yatzy1 {
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s;    
+        int s;
         s = 0;
         if (d1 == 3) s += 3;
         if (d2 == 3) s += 3;
@@ -72,7 +67,7 @@ public class Yatzy1 {
 
     public int fours()
     {
-        int sum;    
+        int sum;
         sum = 0;
         for (int at = 0; at != 5; at++) {
             if (dice[at] == 4) {
@@ -86,7 +81,7 @@ public class Yatzy1 {
     {
         int s = 0;
         int i;
-        for (i = 0; i < dice.length; i++) 
+        for (i = 0; i < dice.length; i++)
             if (dice[i] == 5)
                 s = s + 5;
         return s;
@@ -95,7 +90,7 @@ public class Yatzy1 {
     public int sixes()
     {
         int sum = 0;
-        for (int at = 0; at < dice.length; at++) 
+        for (int at = 0; at < dice.length; at++)
             if (dice[at] == 6)
                 sum = sum + 6;
         return sum;
@@ -130,7 +125,7 @@ public class Yatzy1 {
             if (counts[6-i-1] >= 2) {
                 n++;
                 score += (6-i);
-            }        
+            }
         if (n == 2)
             return score * 2;
         else
