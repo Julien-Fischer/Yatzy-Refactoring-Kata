@@ -4,7 +4,7 @@ import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
 
 /**
- * The player scores the sum of all dice, no matter what they read.
+ * This {@link ScoringStrategy} scores the sum of all dice, no matter what they read.
  *
  * @see <a href="https://sammancoaching.org/kata_descriptions/yatzy.html">Chance Kata Rules</a>
  */
