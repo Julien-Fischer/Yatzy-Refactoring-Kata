@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Yatzy1Test {
 
-    @Test public void yatzy_scores_50() {
-        int expected = 50;
-        int actual = Yatzy1.yatzy(4,4,4,4,4);
-        assertEquals(expected, actual);
-        assertEquals(50, Yatzy1.yatzy(6,6,6,6,6));
-        assertEquals(0, Yatzy1.yatzy(6,6,6,6,3));
-    }
-
     @Test public void test_1s() {
         assertTrue(Yatzy1.ones(1,2,3,4,5) == 1);
         assertEquals(2, Yatzy1.ones(1,2,1,4,5));

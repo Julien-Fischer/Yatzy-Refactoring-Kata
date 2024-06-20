@@ -11,8 +11,9 @@ import org.codingdojo.yatzy1.scoring.dice.Roll;
 public interface ScoringStrategy {
 
     /**
-     * @return the sum of the dice in the specified {@link Roll}
+     * @return the points scored by the specified {@link Roll} for
+     * a specific category.
      */
-    int getSum(Roll roll);
+    int getScore(Roll roll);
 
 }

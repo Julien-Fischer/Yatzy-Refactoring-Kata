@@ -37,9 +37,9 @@ public class ChanceStrategyTests {
 
     @ParameterizedTest
     @MethodSource("rollSumDatasource")
-    void sum_shouldReturnTheSumOfTheDiceInThisRoll(int expected, Roll roll) {
+    void getScore_shouldReturnTheSumOfTheDiceInThisRoll(int expected, Roll roll) {
         // When
-        int sum = strategy.getSum(roll);
+        int sum = strategy.getScore(roll);
         // Then
         assertEquals(expected, sum);
     }

@@ -11,7 +11,7 @@ import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
 public class ChanceStrategy implements ScoringStrategy {
 
     @Override
-    public int getSum(Roll roll) {
+    public int getScore(Roll roll) {
         return roll.getSum();
     }
 

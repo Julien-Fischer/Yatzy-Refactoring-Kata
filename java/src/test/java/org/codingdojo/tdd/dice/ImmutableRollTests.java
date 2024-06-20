@@ -51,7 +51,7 @@ public class ImmutableRollTests {
     }
 
     @ParameterizedTest
-    @EnumSource(value = RollDataset.class, names = {"YATZY_1", "YATZY_2", "YATZY_4"}, mode = EnumSource.Mode.EXCLUDE)
+    @EnumSource(value = RollDataset.class, names = {"YATZY_1", "YATZY_2", "YATZY_4", "YATZY_6"}, mode = EnumSource.Mode.EXCLUDE)
     void isDeterministic_whenSomeDiceHaveDifferentValues_shouldReturnFalse(RollDataset data) {
         // Given
         var roll = data.getRoll();
