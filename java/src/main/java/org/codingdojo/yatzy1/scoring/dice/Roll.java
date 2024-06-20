@@ -12,7 +12,7 @@ public interface Roll {
      int getSum();
 
      /**
-      * A roll is deemed deterministic when it has zero variance since all
+      * A {@link Roll} is deemed deterministic when it has zero variance since all
       * possible values are equal.
       * Examples of deterministic rolls:
       * - {3, 3, 3, 3, 3}
@@ -25,5 +25,18 @@ public interface Roll {
       * with probability 1; false otherwise.
       */
      boolean isDeterministic();
+
+     /**
+      * A {@link Roll} is deemed sequential when it contains no duplicates,
+      * regardless of the order of the dice.
+      *
+      * Since Yatzy only uses five six-faced dice, the only possible sequential
+      * rolls are:
+      * - {1, 2, 3, 4, 5}
+      * - {2, 3, 4, 5, 6}
+      *
+      * @return true if there are no matching dice in this roll.
+      */
+     boolean isSequential();
 
 }

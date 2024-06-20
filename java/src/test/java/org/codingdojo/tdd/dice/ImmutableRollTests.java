@@ -59,4 +59,22 @@ public class ImmutableRollTests {
         assertFalse(roll.isDeterministic());
     }
 
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT"})
+    void isSequential_whenSequential_shouldReturnTrue(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When + Then
+        assertTrue(roll.isSequential());
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = RollDataset.class, names = {"SMALL_STRAIGHT", "LARGE_STRAIGHT"}, mode = EnumSource.Mode.EXCLUDE)
+    void isSequential_whenNotSequential_shouldReturnFalse(RollDataset data) {
+        // Given
+        var roll = data.getRoll();
+        // When + Then
+        assertFalse(roll.isSequential());
+    }
+
 }

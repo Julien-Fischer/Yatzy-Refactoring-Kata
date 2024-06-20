@@ -1,5 +1,8 @@
 package org.codingdojo.yatzy1.scoring.dice;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.IntStream;
 
 /**
@@ -27,4 +30,23 @@ public class ImmutableRoll implements Roll {
     public boolean isDeterministic() {
         return IntStream.of(dices).distinct().count() == 1;
     }
+
+    @Override
+    public boolean isSequential() {
+        var sorted = getSortedList();
+        for (var i = sorted.size() - 2; i >= 0; i--) {
+            if (sorted.get(i) != sorted.get(i + 1) + 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<Integer> getSortedList() {
+        return Arrays.stream(dices)
+            .boxed()
+            .sorted(Comparator.reverseOrder())
+            .toList();
+    }
+
 }
