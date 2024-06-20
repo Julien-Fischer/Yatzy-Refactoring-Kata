@@ -2,6 +2,7 @@ package org.codingdojo.yatzy1;
 
 import org.codingdojo.yatzy1.scoring.dice.ImmutableRoll;
 import org.codingdojo.yatzy1.scoring.strategies.impl.*;
+import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.OnesStrategy;
 
 public class Yatzy1 {
 

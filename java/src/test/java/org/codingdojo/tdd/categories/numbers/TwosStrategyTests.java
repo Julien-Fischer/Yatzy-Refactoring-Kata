@@ -1,9 +1,9 @@
-package org.codingdojo.tdd.categories;
+package org.codingdojo.tdd.categories.numbers;
 
 import org.codingdojo.dataset.RollDataset;
 import org.codingdojo.yatzy1.scoring.dice.Roll;
 import org.codingdojo.yatzy1.scoring.strategies.ScoringStrategy;
-import org.codingdojo.yatzy1.scoring.strategies.impl.OnesStrategy;
+import org.codingdojo.yatzy1.scoring.strategies.impl.numbers.TwosStrategy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class OnesStrategyTests {
+public class TwosStrategyTests {
 
-    private final ScoringStrategy strategy = new OnesStrategy();
+    private final ScoringStrategy strategy = new TwosStrategy();
 
     ///////////////////////////////////////////////////////////
     // DATASETS
@@ -24,16 +24,12 @@ public class OnesStrategyTests {
 
     private static Stream<Arguments> scoreSource() {
         return Stream.of(
-            arguments(5, RollDataset.YATZY_1.getRoll()),
-            arguments(1, RollDataset.SMALL_STRAIGHT.getRoll()),
-            arguments(1, RollDataset.SMALL_STRAIGHT_SHUFFLED.getRoll()),
-            arguments(2, RollDataset.PAIR_1_1.getRoll()),
-            arguments(1, RollDataset.PAIR_3_3.getRoll()),
-            arguments(1, RollDataset.PAIR_5_5.getRoll()),
-            arguments(1, RollDataset.PAIR_3_3_3.getRoll()),
-            arguments(1, RollDataset.PAIR_6_6_6_6.getRoll()),
-            arguments(4, RollDataset.PAIR_1_1_1_1.getRoll()),
-            arguments(3, RollDataset.PAIR_1_1_1_4_4.getRoll())
+            arguments(10, RollDataset.YATZY_2.getRoll()),
+            arguments(2, RollDataset.SMALL_STRAIGHT.getRoll()),
+            arguments(2, RollDataset.SMALL_STRAIGHT_SHUFFLED.getRoll()),
+            arguments(2, RollDataset.LARGE_STRAIGHT.getRoll()),
+            arguments(2, RollDataset.LARGE_STRAIGHT_SHUFFLED.getRoll()),
+            arguments(4, RollDataset.PAIR_2_2_3_3.getRoll())
         );
     }
 
@@ -45,20 +41,16 @@ public class OnesStrategyTests {
     @EnumSource(
         value = RollDataset.class,
         names = {
-            "YATZY_1",
+            "YATZY_2",
             "SMALL_STRAIGHT",
             "SMALL_STRAIGHT_SHUFFLED",
-            "PAIR_1_1",
-            "PAIR_3_3",
-            "PAIR_5_5",
-            "PAIR_3_3_3",
-            "PAIR_6_6_6_6",
-            "PAIR_1_1_1_1",
-            "PAIR_1_1_1_4_4"
+            "LARGE_STRAIGHT",
+            "LARGE_STRAIGHT_SHUFFLED",
+            "PAIR_2_2_3_3"
         },
         mode = EnumSource.Mode.EXCLUDE
     )
-    void getScore_whenRollNotContainsOnes_shouldReturnZero(RollDataset data) {
+    void getScore_whenRollNotContainsTwos_shouldReturnZero(RollDataset data) {
         // Given
         var roll = data.getRoll();
         // When
@@ -69,7 +61,7 @@ public class OnesStrategyTests {
 
     @ParameterizedTest
     @MethodSource("scoreSource")
-    void getScore_whenRollContainsOnes_shouldReturnSumOfMatchingDice(int expected, Roll roll) {
+    void getScore_whenRollContainsTwos_shouldReturnSumOfMatchingDice(int expected, Roll roll) {
         // When
         var actual = strategy.getScore(roll);
         // Then
