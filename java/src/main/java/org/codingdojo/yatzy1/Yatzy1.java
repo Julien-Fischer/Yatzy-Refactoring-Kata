@@ -49,13 +49,9 @@ public class Yatzy1 {
         return new FivesStrategy().getScore(roll);
     }
 
-    public int sixes()
-    {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++)
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+    public int sixes() {
+        var roll = new ImmutableRoll(dice[0], dice[1], dice[2], dice[3], dice[4]);
+        return new SixesStrategy().getScore(roll);
     }
 
     public int score_pair(int d1, int d2, int d3, int d4, int d5) {
